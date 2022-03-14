@@ -41,13 +41,13 @@ void printLL(node*head){
 int main(){
     
     node* head = NULL;
-    
+
     insertAtHead(head,5);
     insertAtHead(head,4);
     insertAtHead(head,3);
     insertAtHead(head,2);
     insertAtHead(head,1);
 
-    printLL(head);
+    printLL(head); //output = 1->2->3->4->5->
     return 0;
 }

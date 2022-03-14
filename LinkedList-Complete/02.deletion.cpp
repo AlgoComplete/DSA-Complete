@@ -19,6 +19,15 @@ void insertAtHead(node*&head, int d){
     temp->next = head;
     head = temp;
 }
+int length(node*head){
+	int cnt = 0;
+	while(head!=NULL){
+		cnt++;
+		head = (*head).next;
+		//or head = head->next;
+	}
+	return cnt;
+}
 void deleteAtHead(node*&head){
     // 1 -> 2 -> 3 , head stores address of 1
 	//after deltion: 2->3, head stores address of 2
@@ -49,6 +58,31 @@ void deleteAtTail(node*&head){
     delete temp;
     prev->next = NULL;
 }
+void deleteAtPosition(node*&head,int p){
+    if(head == NULL){
+        return;
+    }
+    if(p == 0){
+        deleteAtHead(head);
+        return;
+    }
+    if(p >= length(head)){
+        deleteAtTail(head);
+        return;
+    }
+    //delete at middle
+    node*prev = head;
+    node*curr = head;
+    int jump = 1;
+    while(jump <= p-1){
+        prev = curr;
+        curr = curr->next;
+        jump++;
+    }
+    prev->next = curr->next;
+    delete curr;
+
+}
 void printLL(node*head){
     while(head != NULL){
         cout<<head->data<<"->";
@@ -67,13 +101,14 @@ int main(){
     insertAtHead(head,1);
     printLL(head);// output = 1->2->3->4->5->
 
-    deleteAtHead(head);
+    deleteAtPosition(head,0); //at head
     printLL(head);//output = 2->3->4->5->
 
-    deleteAtTail(head);
+    deleteAtPosition(head,100); //at tail
     printLL(head);//output = 2->3->4->
 
-    //deletAtPosition(head,2);
-    printLL(head);//output = 
+    deleteAtPosition(head,2);
+    printLL(head);//output = 2->4->;
+    
     return 0;
 }

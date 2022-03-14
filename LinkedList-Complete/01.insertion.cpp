@@ -32,6 +32,22 @@ void insertAtHead(node* &head, int d){
     temp->next = head; //temp's next will store the address stored in head
     head = temp; // head will point to new node i.e. temp
 }
+
+void insertAtTail(node*&head, int d){
+   if(head == NULL) {
+       //empty ll
+       head = new node(d);
+       return;
+   }
+   //traverse the linked list and get the tail pointer 
+   node* tail = head;
+   while(tail->next != NULL){
+       tail = tail->next;
+   }
+   //now tail is pointing to the current last node in the LL.
+   node *temp = new node(d); //temp node
+   tail->next = temp;
+}
 void printLL(node*head){
     //traversing the linked list
     while(head != NULL){
@@ -51,5 +67,9 @@ int main(){
     insertAtHead(head,1);
 
     printLL(head); //output = 1->2->3->4->5->
+
+    insertAtTail(head,6);
+    insertAtTail(head,7);
+    printLL(head); // output = 1->2->3->4->5->6->7->
     return 0;
 }

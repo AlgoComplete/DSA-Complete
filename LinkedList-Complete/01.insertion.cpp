@@ -48,6 +48,48 @@ void insertAtTail(node*&head, int d){
    node *temp = new node(d); //temp node
    tail->next = temp;
 }
+//will return length of the LL
+int length(node*head){
+	int cnt = 0;
+	while(head!=NULL){
+		cnt++;
+		head = (*head).next;
+		//or head = head->next;
+	}
+	return cnt;
+}
+
+//p -> position at which node is to be inserted
+// p = 0 - means, we are inserting from head
+//for LL= 0 -> 1 -> 2 -> 4, if p = 2, d = 3
+//new LL will be : 0>1>3>2>4
+//p>len of ll, insertion at tail
+void insertionAtPosition(node*&head, int d, int p){
+    if(head == NULL or p == 0){
+		insertAtHead(head,d);
+		return;
+	}
+	else if(p>=length(head)){
+		//insert at tail
+		insertAtTail(head,d);
+		return;
+	}
+	else{
+		//insert in the middle
+		//reach temp node by taking p-1 jumps
+		int jump = 1;
+		node*temp = head;
+		while(jump<=p-1){
+			temp = temp->next;
+			jump++;
+		}
+		//create a new node
+		node*n = new node(d);
+		n->next = temp->next;
+		temp->next = n;
+
+	}
+}
 void printLL(node*head){
     //traversing the linked list
     while(head != NULL){
@@ -71,5 +113,22 @@ int main(){
     insertAtTail(head,6);
     insertAtTail(head,7);
     printLL(head); // output = 1->2->3->4->5->6->7->
+
+    insertionAtPosition(head,0,0);
+    printLL(head); // ouput = 0->1->2->3->4->5->6->7->
+
+    cout<<length(head)<<endl; //output = 8
+    
+    insertionAtPosition(head,8,8);
+    printLL(head); //output = 0->1->2->3->4->5->6->7->8->
+
+    //now len of LL = 9
+    insertionAtPosition(head,9,20); // will result into insertionAtTail
+    printLL(head);// output = 0->1->2->3->4->5->6->7->8->9->
+
+    //inserting 45 between 4->5
+    insertionAtPosition(head,45,5);
+    printLL(head); //output = 0->1->2->3->4->45->5->6->7->8->9->
+
     return 0;
 }

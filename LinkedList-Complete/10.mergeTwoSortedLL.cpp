@@ -1,7 +1,9 @@
 #include<iostream>
 using namespace std;
 /*
-
+a = 1->3->4->7
+b = 0->2->8->10->
+output = 0->1->2->3->4->7->8->10->
 */
 class node{
 public:
@@ -64,11 +66,11 @@ int main(){
     insertAtHead(head2,8);
     insertAtHead(head2,2);
     insertAtHead(head2,0);
-    printLL(head2);
+    printLL(head2);//ouput = 0->2->8->10->
 
     node* mergedLL = solve(head1,head2);
     cout<<"Merged LL:"<<endl;
-    printLL(mergedLL);
+    printLL(mergedLL); //output = 0->1->2->3->4->7->8->10->
     
     return 0;
 }

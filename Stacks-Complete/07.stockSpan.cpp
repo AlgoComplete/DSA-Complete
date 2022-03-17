@@ -51,12 +51,38 @@ vector<int> findStockSpans(vector<int> prices){
     }
     return spans;
 }
+//another implementation (better)
+vector<int> findStockSpans2(vector<int> prices){
+    stack<int> s; // we will store i that is day number, price of stock in each section of stack
+    vector<int> spans;// for storing answers
 
+    s.push(0);
+    spans.push_back(1);
+
+    for(int i = 1; i<prices.size(); i++){
+        if(s.empty()){
+            spans.push_back(i+1);
+            return spans;
+        }
+
+        if(prices[i] < prices[s.top()]){
+            spans.push_back(i-s.top());
+            s.push(i);
+        }
+        else{
+            while(prices[i] >= prices[s.top()]){
+                s.pop();
+            }
+            i--;
+        }
+    }
+    return spans;
+}
 int main(){
 
-    //vector<int> prices{100,80,60,70,60,75,85};
-    vector<int> prices{31, 27, 14, 21, 30, 22};
-    vector<int> span = findStockSpans(prices);
+    vector<int> prices{100,80,60,70,60,75,85};
+    //vector<int> prices{31, 27, 14, 21, 30, 22};
+    vector<int> span = findStockSpans2(prices);
     for(int x : span){
         cout<<x<<" ";
     }

@@ -1,91 +1,49 @@
+//better thinking approach for stock span problem 
+// this question is a little extension of Nearest Greater to Left Question
+
 #include<iostream>
-#include<stack>
 #include<vector>
+#include<stack>
 using namespace std;
-/*
-Q- Given a list of a stock prices for n days.
-Find the span of stock for each day.
 
-Span - Span of a stock means the number of days for which 
-        the current price is highest.
+vector<int> solve(vector<int> vec){
+    vector<int> v;
+    stack<pair<int,int>> s;
 
-Efficient approach - using stack.
-
-1. Push each stock price along with day number that starts with 0 inside the stack
-2. If ith price is higher than the top(), remove top() elements until 
-    ith price is lower than top.
-3. Calculate: i(day number) of current stock - i of top, which will be the required span
-4. If stack is empty and there still needs a price to be pushed
-    this means it is the highest price that is at the last day
-    , so for this span will be i+1
-*/
-
-vector<int> findStockSpans(vector<int> prices){
-    stack<pair<int,int>> s; // we will store i that is day number, price of stock in each section of stack
-    vector<int> spans;// for storing answers
-    pair<int,int> p;
-    p.first = 0;
-    p.second = prices[0];
-    s.push(p);
-    spans.push_back(1);
-
-    for(int i = 1; i<prices.size(); i++){
+    for(int i = 0; i < vec.size(); i++){
         if(s.empty()){
-            spans.push_back(i+1);
-            return spans;
+            v.push_back(-1);
         }
-        
-        p.first = i;
-        p.second = prices[i];
-
-        if(prices[i] < s.top().second){
-            spans.push_back(i-s.top().first);
-            s.push(p);
+        else if(vec[i] < s.top().first){
+            v.push_back(s.top().second);
         }
-        else{
-            while(prices[i] >= s.top().second){
+        else if(vec[i] >= s.top().first){
+            while(!s.empty() and vec[i] >= s.top().first){
                 s.pop();
             }
-            i--;
-        }
-    }
-    return spans;
-}
-//another implementation (better)
-vector<int> findStockSpans2(vector<int> prices){
-    stack<int> s; // we will store i that is day number, price of stock in each section of stack
-    vector<int> spans;// for storing answers
-
-    s.push(0);
-    spans.push_back(1);
-
-    for(int i = 1; i<prices.size(); i++){
-        if(s.empty()){
-            spans.push_back(i+1);
-            return spans;
-        }
-
-        if(prices[i] < prices[s.top()]){
-            spans.push_back(i-s.top());
-            s.push(i);
-        }
-        else{
-            while(prices[i] >= prices[s.top()]){
-                s.pop();
+            if(s.empty()){
+                v.push_back(-1);
             }
-            i--;
+            else{
+                v.push_back(s.top().second);
+            }
         }
+        //pair<int,int> p;
+        //p.first = vec[i];
+        //p.second = i;
+        s.push({vec[i],i});
     }
-    return spans;
+    for(int i = 0; i<v.size(); i++){
+        v[i] = i - v[i];
+    }
+    return v;
 }
-int main(){
-
-    vector<int> prices{100,80,60,70,60,75,85};
-    //vector<int> prices{31, 27, 14, 21, 30, 22};
-    vector<int> span = findStockSpans2(prices);
-    for(int x : span){
-        cout<<x<<" ";
-    }
-    cout<<endl;
-    return 0;
+using namespace std;
+int main()
+{
+    vector<int> v = {100,80,60,70,60,75,85};
+	vector<int> ans = solve(v);
+	for(int x : ans) cout<<x<<" ";
+	cout<<endl;
+	return 0;
 }

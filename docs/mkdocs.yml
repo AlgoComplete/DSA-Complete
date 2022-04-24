@@ -1,0 +1,26 @@
+site_name: DSA-Complete
+site_url: https://example.com/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: cyan
+      accent: orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to Light Mode
+    - scheme: slate
+      primary: cyan
+      accent: orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to Dark Mode
+
+nav:
+- Home: index.md
+- Tutorials:
+  - Linked Lists: 
+    - Introduction: LL/intro.md
+    - Insertion: LL/insertion.md
+  - Queues: queues/insertion.md

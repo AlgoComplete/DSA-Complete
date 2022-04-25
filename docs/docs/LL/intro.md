@@ -41,9 +41,21 @@ public:
     node(int d){
         //constructor
         data = d;
-        next = NULL; //in any new node 'next' will point to 'NULL' in the begining.
+        next = NULL; //in any new node 'next' will point to 'NULL' in the beginning.
     }
 };
+```
+Above, we have defined a "Node" class, now we will will be creating a "Node" object which will store two things- data, next.
+
+``` cpp title="main() class"
+#inlclude <iostream>
+using namespace std;
+
+int main(){
+
+    node* head = new node();
+    return 0;
+}
 ```
 
 

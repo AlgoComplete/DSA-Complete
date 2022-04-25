@@ -17,6 +17,19 @@ theme:
         icon: material/brightness-4
         name: Switch to Dark Mode
 
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+      
 nav:
 - Home: index.md
 - Tutorials:

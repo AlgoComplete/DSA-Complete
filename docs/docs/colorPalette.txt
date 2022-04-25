@@ -1,0 +1,14 @@
+bix box:
+    fill - #DAE8FC
+    Line - #6C8EBF
+
+Internal text: #000000 [No bold]
+
+Arrow(2 pxl) and external text(bold):#FF6666
+
+Small boxes :
+    1.  Fill - #B1DDF0 
+        Line - #10739E
+    2.  Fill - #D5E8D4
+        Line - #009999
+

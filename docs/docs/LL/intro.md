@@ -32,6 +32,21 @@ Linked + List = Linked List
 
 ## Coding a node class
 
+``` cpp title="Node class"
+class node{
+public:
+    int data; // for storing integer data into our nodes
+    node* next; // variable - 'next'is pointer to node datatype
+    
+    node(int d){
+        //constructor
+        data = d;
+        next = NULL; //in any new node 'next' will point to 'NULL' in the begining.
+    }
+};
+```
+
+
 ## Arrays vs Linked List
 
 ### Memory Management
